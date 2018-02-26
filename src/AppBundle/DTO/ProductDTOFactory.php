@@ -10,6 +10,8 @@ namespace AppBundle\DTO;
  */
 class ProductDTOFactory
 {
+    private const FIRST_ELEMENT = 0;
+
     public static function createProductDTOCollectionFromRawData(array $rawData = []) : ProductDTOCollection
     {
         $productsDtoCollection = new ProductDTOCollection();
@@ -18,6 +20,16 @@ class ProductDTOFactory
         }
 
         return $productsDtoCollection;
+    }
+
+    /**
+     * @param array $rawData
+     * @return ProductDTO
+     */
+    public static function createProductDTOFromRawData(array $rawData = []) : ProductDTO
+    {
+        $data = $rawData[self::FIRST_ELEMENT];
+        return new ProductDTO((int)$data->id, (string)$data->name, (int)$data->amount);
     }
 
 }

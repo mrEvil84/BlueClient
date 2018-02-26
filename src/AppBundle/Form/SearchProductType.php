@@ -18,6 +18,10 @@ class SearchProductType extends AbstractType
     public const SEARCH_FOR_KEY = 'SearchFor';
     public const SORT_ORDER_KEY = 'SortOrder';
 
+    /**
+     * @param FormBuilderInterface $builder
+     * @param array $options
+     */
     public function buildForm(FormBuilderInterface $builder, array $options) : void
     {
         $builder

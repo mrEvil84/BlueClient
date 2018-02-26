@@ -4,6 +4,7 @@ namespace AppBundle\Controller;
 
 use AppBundle\DTO\ProductDTOCollection;
 use AppBundle\Exception\ProductsApiException;
+use AppBundle\Form\AddProductType;
 use AppBundle\Form\SearchProductType;
 use AppBundle\Query\SearchQuery;
 use AppBundle\Service\ProductService;
@@ -55,6 +56,26 @@ class DefaultController extends Controller
                 'error' => $exception->getMessage()
             ]);
         }
+    }
+
+    /**
+     * @Route("/add", name="add_product")
+     * @param Request $request
+     * @return Response
+     */
+    public function addProduct(Request $request)
+    {
+        $form = $this->createForm(AddProductType::class);
+        $form->handleRequest($request);
+
+        if ($form->isSubmitted()) {
+            die('todo');
+        }
+
+        return $this->render('default/addProduct.html.twig', [
+            'form' => $form->createView(),
+        ]);
+
 
     }
 

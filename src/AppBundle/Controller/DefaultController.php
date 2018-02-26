@@ -2,6 +2,7 @@
 
 namespace AppBundle\Controller;
 
+use AppBundle\Command\AddProductCommand;
 use AppBundle\DTO\ProductDTOCollection;
 use AppBundle\Exception\ProductsApiException;
 use AppBundle\Form\AddProductType;
@@ -69,7 +70,12 @@ class DefaultController extends Controller
         $form->handleRequest($request);
 
         if ($form->isSubmitted()) {
-            die('todo');
+            $formData = $form->getData();
+            $addProductCommand = new AddProductCommand(
+                AddProductCommand::NULL_ID,
+                $formData[AddProductType::NAME_KEY],
+                $formData[AddProductType::AMOUNT_KEY]
+                );
         }
 
         return $this->render('default/addProduct.html.twig', [

@@ -3,6 +3,7 @@
 namespace AppBundle\Service;
 
 
+use AppBundle\Command\ProductCommand;
 use AppBundle\DTO\ProductDTOCollection;
 use AppBundle\DTO\ProductDTOFactory;
 use AppBundle\Exception\ProductsApiException;
@@ -66,5 +67,22 @@ class ProductService
         $this->curl->close();
 
         return $productDTOCollection;
+    }
+
+    /**
+     * @param ProductCommand $productCommand
+     * @return string
+     */
+    public function addProduct(ProductCommand $productCommand) : string
+    {
+        $this->curl->post(
+            self::STORAGE_URL,
+            [
+                'name' => $productCommand->getName(),
+                'amount' => $productCommand->getAmount()
+            ]
+
+        );
+
     }
 }
